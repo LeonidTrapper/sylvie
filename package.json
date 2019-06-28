@@ -1,13 +1,12 @@
 {
-  "name": "sylvie",
-  "description": "none",
-  "version": "0.0.0",
+  "name": "main.js",
+  "version": "1.0.0",
+  "description": "Sylvie",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "discord.js": "11.1.0",
-    "request": "2.81.0"
-  }
+  "author": "leonid#9085",
+  "license": "UNLICENSED"
 }
+
