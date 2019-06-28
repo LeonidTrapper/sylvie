@@ -157,4 +157,4 @@ return message.channel.send(embedom)
 
 // login
 
-bot.login(process.env.BOT_TOKEN)
+bot.login("NTcyMTQxMTMzMjM3NDUyODMz.XRZsFw.cgmMaOSIOWKUv_2nSuU0FQ6F4QI")
