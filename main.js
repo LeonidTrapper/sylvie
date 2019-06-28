@@ -146,10 +146,10 @@ return message.channel.send(embedom)
 			.setThumbnail('https://pp.userapi.com/c849224/v849224944/1bfea6/IGe5LCIEAg0.jpg')
 			.addField(`Удалено сообщений:`, args[0])
 			.setFooter('По вопросам обращаться к создателю: Leonid#9085')
-			message.channel.send(embed).then(message => message.delete(10000)
-		})
+			message.channel.send(embed).then(message => message.delete(10000))
+		}
 	}
-	}
+}
 
 	
 })
