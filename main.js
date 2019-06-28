@@ -7,8 +7,6 @@ bot.commands = new Discord.Collection();
 
 
 bot.on('ready', async (ready) => {
-	console.log("\x1b[32m",`[Скрипт запущен | ${bot.user.tag}]`,"\x1b[0m")
-	console.log()
 	bot.user.setActivity(`в монитор | ${prefix}help`, {type: `watching`})
 	bot.user.setStatus('dnd')
 })
@@ -19,16 +17,14 @@ bot.on('message', async (message) => {
 	if(message.author.id != '159985870458322944') {
 		return;
 	} else {
-		return message.delete(60000).catch(err => { return })
+		return message.delete(60000)
 	}
 })
 
 
 bot.on('message', async (message) => {
 if(message.content.startsWith('https:/')) {
-return message.delete().then(() => console.log(`${"\x1b[32m"}Удалённая ссылка${"\x1b[0m"} > ${message} | ` + message.author.tag + ' | ' + message.guild.name)).catch(err => {
-console.log(`${"\x1b[31m"}Невозможно удалить сообщение${"\x1b[0m"} > Недостаточно прав | ${message} | ${message.author.tag}`)
-}) 
+return message.delete().then(message.reply('нельзя отправлять ссылки!'))
 } else {
 return;
 }
@@ -71,42 +67,32 @@ if(message.content === 'Отличный ход') {
 let bred = new Discord.RichEmbed()
 .setColor("#945732")
 .setImage("https://memepedia.ru/wp-content/uploads/2019/02/potryasayuschiy-hod-1.jpg")
-message.channel.send(bred).catch(err => {
-console.log(`Отправка прикольчика > Не удалось`)
-})
+message.channel.send(bred)
 }
 
 if(message.content === 'Похуй') {
 let bread = new Discord.RichEmbed()
 .setColor("#A82323")
 .setImage("https://pbs.twimg.com/media/DytV-5tWsAAFeUP.jpg")
-message.channel.send(bread).catch(err => {
-console.log(`Отправка прикольчика > Не удалось`)
-})
+message.channel.send(bread)
 }
 
 if(message.content === 'Хороший вопрос') {
 let breed = new Discord.RichEmbed()
 .setImage("https://pp.userapi.com/c850520/v850520356/150a2a/-6q0a6fPnqo.jpg")
-message.channel.send(breed).catch(err => {
-console.log(`Отправка прикольчика > Не удалось`)
-})
+message.channel.send(breed)
 }
 
 if(message.content === 'А может и нет') {
 let breez = new Discord.RichEmbed()
 .setImage("https://pp.userapi.com/c849132/v849132343/1b16b2/THlhMa4yKyw.jpg")
-message.channel.send(breez).catch(err => {
-console.log(`Отправка прикольчика > Не удалось`)
-})
+message.channel.send(breez)
 }
 
 if(message.content === 'Вот так') {
 let vottak = new Discord.RichEmbed()
 .setImage("https://pp.userapi.com/c851436/v851436235/10a4c1/pVsfFen3-Ug.jpg")
-message.channel.send(vottak).catch(err => {
-console.log(`Отправка прикольчика > Не удалось`)
-})
+message.channel.send(vottak)
 }
 })
 
@@ -121,31 +107,14 @@ let embedm = new Discord.RichEmbed()
 .setColor("#8AC951")
 .setThumbnail(message.author.avatarURL)
 .addField(message.author.tag, "Вот тебе немного помощи")
-.addField("Для администрации:", `${prefix}очистка, ${prefix}clear`)
+.addField("Для администрации:", `${prefix}clear`)
 .addField('Для пользователей:', `${prefix}wl, ${prefix}help`)
 .addField('Пикчи:', 'Похуй, Отличный ход, Вот так, А может и нет, Хороший вопрос')
 .setImage('https://contenthub-static.grammarly.com/blog/wp-content/uploads/2018/05/how-to-ask-for-help-760x400.jpg')
 .addField("Сервер создателя:", links)
 .setFooter('По вопросам обращаться к создателю: Leonid#9085')
 
-return message.channel.send(embedm).catch(err => {
-	console.log(`Помощь > Невозможно`)
-})
-	}
-
-	// next
-
-	if(message.content == `${prefix}keyforclear`) {
-		var ids = '415868083232833536';
-
-if(message.author.id != ids) {
-			return;
-		} else {
-			console.clear()
-			console.log(`${"\x1b[36m"}Очистка${"\x1b[0m"} > ` + 'Developer#0000' + `, вы очистили консоль.`)
-			console.log()
-		}
-
+return message.channel.send(embedm)
 	}
 
 	//next
@@ -161,31 +130,7 @@ let embedom = new Discord.RichEmbed()
 .setThumbnail('https://www.merseaislandlionsclub.com/wp-content/uploads/2017/04/clipboard-list-flat.png')
 .setFooter('По вопросам обращаться к создателю: Leonid#9085')
 
-return message.channel.send(embedom).catch(err => {
-	console.log(`Помощь > Невозможно`)
-})
-	}
-
-	//next 
-
-	if(message.content == `${prefix}чистка`) {
-		var idf = '367707542475898900';
-
-if(message.author.id != idf) {
-			const emojis = message.guild.emojis.find(emoji => emoji.name === 'no');
-			if(!emojis) return console.log(`Эмодзи > Не найдено`)
-			message.react(emojis).catch(err => { console.log(`Эмодзи > Не могу реактить`) }).then(() => console.log(`${"\x1b[33m"}Предупреждение ${"\x1b[0m"}> ${message.author.tag} попытался очистить консоль!`))
-			message.reply('вам нельзя использовать данную команду!').then(message => message.delete(5000)).catch(err => { return })
-			return;
-		} else {
-			if(!emoji) return console.log('Эмодзи > Не найдено')
-			const emoji = message.guild.emojis.find(emoji => emoji.name === 'ok');
-			message.react(emoji).catch(err => { console.log(`Эмодзи > Не могу реактить`) })
-			console.clear()
-			console.log(`${"\x1b[36m"}Очистка${"\x1b[0m"} > ` + message.author.tag + `, вы очистили консоль.`)
-			console.log()
-			return;
-		}
+return message.channel.send(embedom)
 	}
 
 	//next 
@@ -201,7 +146,7 @@ if(message.author.id != idf) {
 			.setThumbnail('https://pp.userapi.com/c849224/v849224944/1bfea6/IGe5LCIEAg0.jpg')
 			.addField(`Удалено сообщений:`, args[0])
 			.setFooter('По вопросам обращаться к создателю: Leonid#9085')
-			message.channel.send(embed).then(message => message.delete(10000).catch(err => { return }));
+			message.channel.send(embed).then(message => message.delete(10000)
 		})
 	}
 	}
@@ -212,10 +157,4 @@ if(message.author.id != idf) {
 
 // login
 
-bot.login(process.env.BOT_TOKEN).catch(err => {
-console.log("\x1b[31m",`[ERR_LOGIN] Запуск не был произведён // Возможные ошибки:`)
-console.log("\x1b[31m",`> Неверно указан токен`)
-console.log("\x1b[31m",`> Превышено время ответа с сервером`)
-console.log("\x1b[31m",`> Отсутствует подключение к интернету${"\x1b[0m"}`)
-return console.log()
-})
+bot.login(process.env.BOT_TOKEN)
