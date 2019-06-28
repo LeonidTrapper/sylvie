@@ -212,7 +212,7 @@ if(message.author.id != idf) {
 
 // login
 
-bot.login(cfg.token).catch(err => {
+bot.login(process.env.BOT_TOKEN).catch(err => {
 console.log("\x1b[31m",`[ERR_LOGIN] Запуск не был произведён // Возможные ошибки:`)
 console.log("\x1b[31m",`> Неверно указан токен`)
 console.log("\x1b[31m",`> Превышено время ответа с сервером`)
