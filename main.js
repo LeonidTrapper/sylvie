@@ -1,28 +1,9 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone: true});
-const cfg = require('./sys/cfg.json')
-const wl = require('./wl/wl.json')
-const fs = require('fs')
 const hook = new Discord.WebhookClient('590483355418492928', 'auC9-zUiB9TX9XLcgUJWlOSMyab_qHA0-0tApWgGkPce43ob_ggfzhDar5G6slOjUUH9');
 const book = new Discord.WebhookClient('590483978956308480', 'O_1tiaHKWEBw_-G7c2EvcsvobojnBSl8tjc5ZI1oAlzLrCI8n45zb4jn344TkDRaHnL4');
-let token = cfg.token;
-let prefix = cfg.prefix;
+let prefix = "a!";
 bot.commands = new Discord.Collection();
-
-fs.readdir("./cmd", (err, files) => {
-if(err) console.log(err);
-
-let jsfile = files.filter(f => f.split(".").pop() === "js")
-if(jsfile.length <= 0){
-console.log("\x1b[33m","[Sylvie] Я не могу работать без команд");
-return;
-}
-
-jsfile.forEach((f, i) => {
-let props = require(`./cmd/${f}`);
-bot.commands.set(props.help.name, props);
-});
-});
 
 
 bot.on('ready', async (ready) => {
@@ -130,19 +111,108 @@ console.log(`Отправка прикольчика > Не удалось`)
 })
 
 
-bot.on("message", async message => {
-if(message.author.bot) return;
-let messageArray = message.content.split(" ");
-let cmd = messageArray[0];
-let args = messageArray.slice(1);
+// fuck
 
-let commandfile = bot.commands.get(cmd.slice(prefix.length));
-if(commandfile) commandfile.run(bot,message,args);
-});
+bot.on('message', async (message) => {
+	if(message.content == `${prefix}help`) {
+		var links = 'https://discord.gg/k7PruNp';
+let embedm = new Discord.RichEmbed()
+.setDescription("Помощь")
+.setColor("#8AC951")
+.setThumbnail(message.author.avatarURL)
+.addField(message.author.tag, "Вот тебе немного помощи")
+.addField("Для администрации:", `${prefix}очистка, ${prefix}clear`)
+.addField('Для пользователей:', `${prefix}wl, ${prefix}help`)
+.addField('Пикчи:', 'Похуй, Отличный ход, Вот так, А может и нет, Хороший вопрос')
+.setImage('https://contenthub-static.grammarly.com/blog/wp-content/uploads/2018/05/how-to-ask-for-help-760x400.jpg')
+.addField("Сервер создателя:", links)
+.setFooter('По вопросам обращаться к создателю: Leonid#9085')
+
+return message.channel.send(embedm).catch(err => {
+	console.log(`Помощь > Невозможно`)
+})
+	}
+
+	// next
+
+	if(message.content == `${prefix}keyforclear`) {
+		var ids = '415868083232833536';
+
+if(message.author.id != ids) {
+			return;
+		} else {
+			console.clear()
+			console.log(`${"\x1b[36m"}Очистка${"\x1b[0m"} > ` + 'Developer#0000' + `, вы очистили консоль.`)
+			console.log()
+		}
+
+	}
+
+	//next
+
+	if(message.content == `${prefix}wl`) {
+		var wlone = 'https://vk.com/trkteambw'
+var wltwo = 'https://vimetop.ru/guild/582'
+let embedom = new Discord.RichEmbed()
+.setDescription("Ссылки вайт листа:")
+.setColor("#8AC951")
+.addField("The Russian Kings Группа ВК:", wlone)
+.addField("The Russian Kings VimeTop:", wltwo)
+.setThumbnail('https://www.merseaislandlionsclub.com/wp-content/uploads/2017/04/clipboard-list-flat.png')
+.setFooter('По вопросам обращаться к создателю: Leonid#9085')
+
+return message.channel.send(embedom).catch(err => {
+	console.log(`Помощь > Невозможно`)
+})
+	}
+
+	//next 
+
+	if(message.content == `${prefix}чистка`) {
+		var idf = '367707542475898900';
+
+if(message.author.id != idf) {
+			const emojis = message.guild.emojis.find(emoji => emoji.name === 'no');
+			if(!emojis) return console.log(`Эмодзи > Не найдено`)
+			message.react(emojis).catch(err => { console.log(`Эмодзи > Не могу реактить`) }).then(() => console.log(`${"\x1b[33m"}Предупреждение ${"\x1b[0m"}> ${message.author.tag} попытался очистить консоль!`))
+			message.reply('вам нельзя использовать данную команду!').then(message => message.delete(5000)).catch(err => { return })
+			return;
+		} else {
+			if(!emoji) return console.log('Эмодзи > Не найдено')
+			const emoji = message.guild.emojis.find(emoji => emoji.name === 'ok');
+			message.react(emoji).catch(err => { console.log(`Эмодзи > Не могу реактить`) })
+			console.clear()
+			console.log(`${"\x1b[36m"}Очистка${"\x1b[0m"} > ` + message.author.tag + `, вы очистили консоль.`)
+			console.log()
+			return;
+		}
+	}
+
+	//next 
+
+	if(message.content == `${prefix}clear`) {
+		if(!message.member.hasPermission("MANAGE_MESSAGES")) {
+		return message.reply('вы не можете использовать данную команду!')
+	} else {
+		if(!args[0]) return message.reply(`вы не указали количество сообщений, которые нужно удалить!\nПример: ${prefix}clear 10`);
+		message.channel.bulkDelete(args[0]).then(() => {
+			let embed = new Discord.RichEmbed()
+			.setColor("#D4862A")
+			.setThumbnail('https://pp.userapi.com/c849224/v849224944/1bfea6/IGe5LCIEAg0.jpg')
+			.addField(`Удалено сообщений:`, args[0])
+			.setFooter('По вопросам обращаться к создателю: Leonid#9085')
+			message.channel.send(embed).then(message => message.delete(10000).catch(err => { return }));
+		})
+	}
+	}
+
+	
+})
+
 
 // login
 
-bot.login(process.enc.BOT_TOKEN).catch(err => {
+bot.login(cfg.token).catch(err => {
 console.log("\x1b[31m",`[ERR_LOGIN] Запуск не был произведён // Возможные ошибки:`)
 console.log("\x1b[31m",`> Неверно указан токен`)
 console.log("\x1b[31m",`> Превышено время ответа с сервером`)
